@@ -60,7 +60,7 @@ export function MainHeader({ onRouteChange }: MainHeaderProps) {
   }
 
   return (
-    <header className="h-14 bg-white border-b border-vercel-gray-100">
+    <header className="h-14 bg-white/80 backdrop-blur-md border-b border-vercel-gray-100">
       <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Left: Logo/Brand */}
         <div className="flex items-center">

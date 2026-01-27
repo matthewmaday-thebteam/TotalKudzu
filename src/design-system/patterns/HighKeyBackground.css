@@ -1,0 +1,138 @@
+/**
+ * HighKeyBackground - Premium High-Key Minimalist Background
+ *
+ * Inspired by AWS IoT Core with a 'barely there' aesthetic.
+ * Uses nearly-white pastels with organic fluid motion.
+ *
+ * Token-driven implementation:
+ *   --color-highkey-1: Pearl blue
+ *   --color-highkey-2: Faint lavender
+ *   --color-highkey-3: Whisper mint/seafoam
+ *
+ * Created: 2026-01-27
+ */
+
+.highkey-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #FFFFFF;
+}
+
+/* Glow blobs - extremely light pastels */
+.highkey-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(var(--highkey-blur, 140px));
+  opacity: var(--highkey-opacity, 0.85);
+  will-change: transform;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Blob 1 - Pearl Blue */
+.highkey-blob-1 {
+  width: 60%;
+  height: 60%;
+  top: -15%;
+  left: -10%;
+  background: var(--color-highkey-1);
+  animation: highkey-drift-1 var(--highkey-duration-1, 25s) infinite;
+}
+
+/* Blob 2 - Faint Lavender */
+.highkey-blob-2 {
+  width: 55%;
+  height: 55%;
+  top: 20%;
+  right: -20%;
+  background: var(--color-highkey-2);
+  animation: highkey-drift-2 var(--highkey-duration-2, 35s) infinite;
+}
+
+/* Blob 3 - Whisper Mint/Seafoam */
+.highkey-blob-3 {
+  width: 50%;
+  height: 50%;
+  bottom: -10%;
+  left: 30%;
+  background: var(--color-highkey-3);
+  animation: highkey-drift-3 var(--highkey-duration-3, 45s) infinite;
+}
+
+/* Figure-eight / elliptical drift animation - Blob 1 */
+@keyframes highkey-drift-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  25% {
+    transform: translate3d(15%, 20%, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(25%, 5%, 0) scale(0.95);
+  }
+  75% {
+    transform: translate3d(10%, 25%, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Figure-eight / elliptical drift animation - Blob 2 */
+@keyframes highkey-drift-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  25% {
+    transform: translate3d(-20%, 15%, 0) scale(0.98);
+  }
+  50% {
+    transform: translate3d(-10%, 30%, 0) scale(1.03);
+  }
+  75% {
+    transform: translate3d(-25%, 10%, 0) scale(0.97);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Figure-eight / elliptical drift animation - Blob 3 */
+@keyframes highkey-drift-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  25% {
+    transform: translate3d(-15%, -20%, 0) scale(1.04);
+  }
+  50% {
+    transform: translate3d(10%, -15%, 0) scale(0.96);
+  }
+  75% {
+    transform: translate3d(20%, -25%, 0) scale(1.01);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* SVG Noise overlay for anti-banding */
+.highkey-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .highkey-blob {
+    animation: none;
+  }
+}

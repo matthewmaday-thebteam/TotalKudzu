@@ -80,6 +80,13 @@
   --color-mesh-4: #F5A623;
 
   /* ---------------------------------------------------------------------------
+     COLOR TOKENS - High-Key Background (premium nearly-white pastels)
+     --------------------------------------------------------------------------- */
+  --color-highkey-1: #E8F4FC;  /* Pearl blue - soft sky */
+  --color-highkey-2: #F3E8F8;  /* Faint lavender - whisper purple */
+  --color-highkey-3: #E8F8F5;  /* Mint seafoam - breath of green */
+
+  /* ---------------------------------------------------------------------------
      TYPOGRAPHY TOKENS - Font Sizes
      --------------------------------------------------------------------------- */
   --font-size-2xs: 10px;

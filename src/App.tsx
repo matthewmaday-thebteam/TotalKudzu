@@ -7,6 +7,7 @@ import { LoginPage } from './components/pages/LoginPage';
 import { ForgotPasswordPage } from './components/pages/ForgotPasswordPage';
 import { ResetPasswordPage } from './components/pages/ResetPasswordPage';
 import { StyleReviewPage } from './design-system/style-review/StyleReviewPage';
+import { HighKeyBackground } from './design-system/patterns/HighKeyBackground';
 
 type AuthView = 'login' | 'forgot-password' | 'reset-password';
 
@@ -54,12 +55,15 @@ function AuthenticatedApp() {
   };
 
   return (
-    <div className="min-h-screen bg-vercel-gray-50">
-      <MainHeader
-        activeRoute={activeRoute}
-        onRouteChange={setActiveRoute}
-      />
-      {renderPage()}
+    <div className="min-h-screen relative">
+      <HighKeyBackground />
+      <div className="relative z-10">
+        <MainHeader
+          activeRoute={activeRoute}
+          onRouteChange={setActiveRoute}
+        />
+        {renderPage()}
+      </div>
     </div>
   );
 }
@@ -101,10 +105,13 @@ function AppContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-vercel-gray-50 flex items-center justify-center">
-        <div className="flex items-center gap-3">
-          <Spinner size="md" />
-          <span className="text-sm text-vercel-gray-400">Loading...</span>
+      <div className="min-h-screen relative">
+        <HighKeyBackground />
+        <div className="relative z-10 min-h-screen flex items-center justify-center">
+          <div className="flex items-center gap-3">
+            <Spinner size="md" />
+            <span className="text-sm text-vercel-gray-400">Loading...</span>
+          </div>
         </div>
       </div>
     );

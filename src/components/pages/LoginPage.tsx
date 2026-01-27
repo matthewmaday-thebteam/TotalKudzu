@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Spinner } from '../Spinner';
-import { MeshGradientBackground } from '../../design-system/patterns/MeshGradientBackground';
+import { HighKeyBackground } from '../../design-system/patterns/HighKeyBackground';
 
 interface LoginPageProps {
   onForgotPassword: () => void;
@@ -30,10 +30,11 @@ export function LoginPage({ onForgotPassword }: LoginPageProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <MeshGradientBackground />
+    <div className="min-h-screen relative">
+      <HighKeyBackground />
 
-      <div className="w-full max-w-sm">
+      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div className="w-full max-w-sm">
         {/* Card */}
         <div className="bg-white rounded-xl p-8" style={{ boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}>
           {/* Header */}
@@ -111,6 +112,7 @@ export function LoginPage({ onForgotPassword }: LoginPageProps) {
               Forgot your password?
             </button>
           </div>
+        </div>
         </div>
       </div>
     </div>

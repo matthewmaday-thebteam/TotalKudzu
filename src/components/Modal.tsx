@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ModalProps {
   isOpen: boolean;
@@ -51,7 +52,7 @@ export function Modal({
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <div className="fixed inset-0 z-[1000] overflow-hidden">
       {/* Backdrop with blur */}
       <div
@@ -136,4 +137,7 @@ export function Modal({
       </div>
     </div>
   );
+
+  // Use portal to render modal at document body level, escaping any stacking contexts
+  return createPortal(modalContent, document.body);
 }

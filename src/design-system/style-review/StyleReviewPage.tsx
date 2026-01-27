@@ -57,12 +57,12 @@ export function StyleReviewPage({ onClose, initialSection = 'tokens' }: StyleRev
   ];
 
   return (
-    <div className={`min-h-screen ${showBackground ? 'bg-transparent' : 'bg-white'}`}>
+    <div className="min-h-screen relative bg-white">
       {/* Background preview overlay - rendered first so it's behind content */}
       {showBackground && <MeshGradientBackground />}
 
       {/* Header */}
-      <div className={`sticky top-0 z-50 border-b border-vercel-gray-100 ${showBackground ? 'bg-white/90 backdrop-blur-sm' : 'bg-white'}`}>
+      <div className={`sticky top-0 z-50 border-b border-vercel-gray-100 ${showBackground ? 'bg-white/80 backdrop-blur-md' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
@@ -105,7 +105,7 @@ export function StyleReviewPage({ onClose, initialSection = 'tokens' }: StyleRev
       </div>
 
       {/* Content */}
-      <div className={`max-w-7xl mx-auto px-6 py-8 ${showBackground ? 'relative z-10' : ''}`}>
+      <div className={`max-w-7xl mx-auto px-6 py-8 relative ${showBackground ? 'z-10' : 'z-10'}`}>
         {activeSection === 'tokens' && <TokensSection />}
         {activeSection === 'typography' && <TypographyPreview showAll />}
         {activeSection === 'atoms' && <AtomsSection />}
@@ -150,6 +150,17 @@ function TokensSection() {
       { name: 'Purple', value: '#764ba2', token: '--color-brand-purple' },
       { name: 'The B Team', value: '#E50A73', token: '--color-bteam-brand' },
       { name: 'The B Team Light', value: '#FDF2F6', token: '--color-bteam-brand-light' },
+    ],
+    'High-Key Background': [
+      { name: 'Pearl Blue', value: '#E8F4FC', token: '--color-highkey-1' },
+      { name: 'Faint Lavender', value: '#F3E8F8', token: '--color-highkey-2' },
+      { name: 'Whisper Mint', value: '#E8F8F5', token: '--color-highkey-3' },
+    ],
+    'Mesh Gradient': [
+      { name: 'Mesh 1 (Indigo)', value: '#667eea', token: '--color-mesh-1' },
+      { name: 'Mesh 2 (Purple)', value: '#764ba2', token: '--color-mesh-2' },
+      { name: 'Mesh 3 (Teal)', value: '#50E3C2', token: '--color-mesh-3' },
+      { name: 'Mesh 4 (Amber)', value: '#F5A623', token: '--color-mesh-4' },
     ],
   };
 
@@ -1067,7 +1078,7 @@ function PatternsSection({ showBackground, setShowBackground }: { showBackground
             <ul className="text-xs text-vercel-gray-400 space-y-1">
               <li><span className="font-mono text-brand-indigo">duration</span>: Animation duration in seconds (default: 20)</li>
               <li><span className="font-mono text-brand-indigo">blur</span>: Blur intensity in pixels (default: 80)</li>
-              <li><span className="font-mono text-brand-indigo">opacity</span>: Opacity 0-1 (default: 0.6)</li>
+              <li><span className="font-mono text-brand-indigo">opacity</span>: Opacity 0-1 (default: 0.75)</li>
             </ul>
           </div>
 
@@ -1078,6 +1089,99 @@ function PatternsSection({ showBackground, setShowBackground }: { showBackground
               <li>Content above should have position: relative and z-index</li>
               <li>Respects prefers-reduced-motion</li>
               <li>Do NOT override colors with raw hex values</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* High-Key Background - Currently Active */}
+        <div className="p-6 border border-vercel-gray-100 rounded-lg mt-6">
+          <div className="flex items-start justify-between mb-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-medium text-vercel-gray-600">HighKeyBackground</h3>
+                <span className="px-2 py-0.5 text-2xs font-medium bg-success-light text-success-text rounded">ACTIVE</span>
+              </div>
+              <p className="text-xs text-vercel-gray-400 mt-1">
+                Premium high-key minimalist background with nearly-white pastels and organic fluid motion.
+                Inspired by AWS IoT Core. Currently active on all pages.
+              </p>
+              <p className="text-2xs text-vercel-gray-200 mt-2 font-mono">
+                src/design-system/patterns/HighKeyBackground.tsx
+              </p>
+            </div>
+          </div>
+
+          {/* Inline preview */}
+          <div className="relative h-32 rounded-lg overflow-hidden border border-vercel-gray-100 mt-4">
+            <div className="absolute inset-0 bg-white">
+              <div
+                className="absolute w-1/2 h-1/2 rounded-full -top-1/4 -left-1/4"
+                style={{
+                  background: '#E8F4FC',
+                  filter: 'blur(40px)',
+                  opacity: 0.4,
+                  animation: 'highkey-drift-1 8s ease-in-out infinite'
+                }}
+              />
+              <div
+                className="absolute w-1/2 h-1/2 rounded-full top-0 -right-1/4"
+                style={{
+                  background: '#F3E8F8',
+                  filter: 'blur(40px)',
+                  opacity: 0.4,
+                  animation: 'highkey-drift-2 10s ease-in-out infinite'
+                }}
+              />
+              <div
+                className="absolute w-1/2 h-1/2 rounded-full -bottom-1/4 left-1/4"
+                style={{
+                  background: '#E8F8F5',
+                  filter: 'blur(40px)',
+                  opacity: 0.4,
+                  animation: 'highkey-drift-3 12s ease-in-out infinite'
+                }}
+              />
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-xs text-vercel-gray-300">Preview (scaled down)</span>
+            </div>
+          </div>
+
+          <div className="bg-vercel-gray-50 rounded-lg p-4 mt-4">
+            <p className="text-xs font-medium text-vercel-gray-600 mb-2">Properties:</p>
+            <ul className="text-xs text-vercel-gray-400 space-y-1">
+              <li><span className="font-mono text-brand-indigo">blur</span>: Blur intensity in pixels (default: 140)</li>
+              <li><span className="font-mono text-brand-indigo">opacity</span>: Blob opacity 0-1 (default: 0.85)</li>
+              <li><span className="font-mono text-brand-indigo">durationMultiplier</span>: Speed multiplier (default: 1, higher = slower)</li>
+            </ul>
+          </div>
+
+          <div className="bg-vercel-gray-50 rounded-lg p-4 mt-4">
+            <p className="text-xs font-medium text-vercel-gray-600 mb-2">Color Tokens (Nearly-White Pastels):</p>
+            <div className="flex gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded border border-vercel-gray-100" style={{ background: '#E8F4FC' }} />
+                <span className="text-xs text-vercel-gray-400 font-mono">--color-highkey-1</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded border border-vercel-gray-100" style={{ background: '#F3E8F8' }} />
+                <span className="text-xs text-vercel-gray-400 font-mono">--color-highkey-2</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded border border-vercel-gray-100" style={{ background: '#E8F8F5' }} />
+                <span className="text-xs text-vercel-gray-400 font-mono">--color-highkey-3</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-success-light rounded-lg p-4 mt-4">
+            <p className="text-xs font-medium text-vercel-gray-600 mb-2">Key Features:</p>
+            <ul className="text-xs text-vercel-gray-400 space-y-1">
+              <li>GPU-accelerated with translate3d() for 60fps smoothness</li>
+              <li>SVG noise overlay prevents color banding</li>
+              <li>Figure-eight / elliptical drift paths</li>
+              <li>Respects prefers-reduced-motion</li>
+              <li>Vibe: "Sunlight hitting a pearl—calm, expensive, professional"</li>
             </ul>
           </div>
         </div>
