@@ -1,6 +1,29 @@
 // User Management Types
 export type UserRole = 'admin' | 'user';
 
+// Date Range Type
+export interface DateRange {
+  start: Date;
+  end: Date;
+}
+
+// Holiday Types (for HolidayCalendar demo)
+export interface BulgarianHoliday {
+  id: string;
+  holiday_date: string;
+  holiday_name: string;
+  is_system_generated: boolean;
+  year: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EmployeeTimeOff {
+  id: string;
+  start_date: string;
+  end_date: string;
+}
+
 export interface AppUser {
   id: string;
   email: string;

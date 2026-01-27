@@ -6,11 +6,19 @@ import { UsersPage } from './components/pages/UsersPage';
 import { LoginPage } from './components/pages/LoginPage';
 import { ForgotPasswordPage } from './components/pages/ForgotPasswordPage';
 import { ResetPasswordPage } from './components/pages/ResetPasswordPage';
+import { StyleReviewPage } from './design-system/style-review/StyleReviewPage';
 
 type AuthView = 'login' | 'forgot-password' | 'reset-password';
 
 function AuthenticatedApp() {
   const [activeRoute, setActiveRoute] = useState<NavRoute>('home');
+
+  // If showing design system page, render it full-screen without header
+  if (activeRoute === 'design-system') {
+    return (
+      <StyleReviewPage onClose={() => setActiveRoute('home')} />
+    );
+  }
 
   const renderPage = () => {
     switch (activeRoute) {
