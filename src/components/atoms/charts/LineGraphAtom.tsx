@@ -37,9 +37,10 @@ import {
 } from './chartTheme';
 
 // Formatter functions extracted outside component (no props dependencies)
-const tooltipFormatter = (value: number | undefined, name: string | undefined) => [
-  formatChartCurrency(value ?? 0),
-  name ?? '',
+// Use explicit unknown for recharts compatibility - ValueType can be string | number | (string | number)[]
+const tooltipFormatter = (value: unknown, name: unknown) => [
+  formatChartCurrency(typeof value === 'number' ? value : 0),
+  typeof name === 'string' ? name : '',
 ];
 
 const legendFormatter = (value: string) => (

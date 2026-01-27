@@ -28,7 +28,8 @@ import {
 } from './chartTheme';
 
 // Formatter functions extracted outside component (no props dependencies)
-const tooltipFormatter = (value: number | undefined) => [formatChartHours(value ?? 0), 'Hours'];
+// Use explicit any for recharts compatibility - ValueType can be string | number | (string | number)[]
+const tooltipFormatter = (value: unknown) => [formatChartHours(typeof value === 'number' ? value : 0), 'Hours'];
 
 const legendFormatter = (value: string) => (
   <span style={{ fontFamily: chartFontFamily, color: chartColors.axisText }}>
