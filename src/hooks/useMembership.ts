@@ -65,6 +65,8 @@ export function useMembership(): UseMembershipReturn {
         .is('deleted_at', null)
         .single();
 
+      console.log('useMembership fetch result:', { memberData, memberError, userId: user.id });
+
       // PGRST116 = no rows returned, which is expected for new users
       if (memberError && memberError.code !== 'PGRST116') {
         throw memberError;
