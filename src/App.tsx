@@ -27,6 +27,7 @@ function AuthenticatedApp() {
   const [activeRoute, setActiveRoute] = useState<NavRoute>('home');
   const [onboardingStep, setOnboardingStep] = useState<OnboardingStep>('company');
   const [onboardingResult, setOnboardingResult] = useState<OnboardingCompleteResponse | null>(null);
+  const [onboardingComplete, setOnboardingComplete] = useState(false);
 
   // If showing design system page, render it full-screen without header
   if (activeRoute === 'design-system') {
@@ -36,7 +37,7 @@ function AuthenticatedApp() {
   }
 
   // Loading state while checking membership
-  if (membershipLoading) {
+  if (membershipLoading || onboardingComplete) {
     return (
       <div className="min-h-screen relative">
         <HighKeyBackground />
@@ -80,13 +81,15 @@ function AuthenticatedApp() {
           <SuccessPage
             data={onboardingResult}
             onGoToApp={async () => {
+              // Mark onboarding as complete to show loading state
+              setOnboardingComplete(true);
               // Clear onboarding state
               setOnboardingResult(null);
-              // Refetch membership - once this completes, the !membership check
-              // will fail and the main app will be shown
-              await refetch();
-              // Reset step only after refetch completes (in case user needs to re-onboard later)
               setOnboardingStep('company');
+              // Refetch membership - once this completes, membership will be set
+              await refetch();
+              // Clear the flag - now membership should exist and main app will show
+              setOnboardingComplete(false);
             }}
           />
         </OnboardingProvider>
